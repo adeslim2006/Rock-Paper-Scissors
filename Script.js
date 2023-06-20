@@ -1,68 +1,122 @@
-const content = ["rock", "paper", "scissors"];
-const computerSelection = getComputerChoice();
+function Game() {
 
-function getComputerChoice() {
+   const options = ["rock", "paper", "scissors"];
+
    
-   return  content[Math.floor(Math.random()*3)];
-}
+   let rounds = 0;
+   let playerScore = 0;
+   let computerScore = 0;
 
 function playRound(playerSelection, computerSelection) {
    let ans = "";
+
+
+    playerSelection = prompt("Rock! Paper! Scissors!").toLowerCase();
+    computerSelection = options[Math.floor(Math.random()*3)];
    
-   if (playerSelection === content[1] && computerSelection === content[0]) { 
+   if (playerSelection === options[1] && computerSelection === options[0]) { 
 
-      ans = `You Win! ${playerSelection} wraps ${computerSelection}`
+      ans = `You Win! ${playerSelection} wraps ${computerSelection}` 
+       playerScore++;
+       rounds++;
+       
 
-   } else if (playerSelection === content[0] && computerSelection === content[2]) {
+   } else if (playerSelection === options[0] && computerSelection === options[2]) {
 
       ans = `You Win! ${playerSelection} breaks ${computerSelection}`
+       playerScore++;
+       rounds++;
+       
 
-   } else if (playerSelection === content[2] && computerSelection === content[1]) {
+   } else if (playerSelection === options[2] && computerSelection === options[1]) {
 
       ans = `You Win! ${playerSelection} cuts ${computerSelection}`
+      playerScore++;
+      rounds++;
+      
 
-   } else if (playerSelection === content[0] && computerSelection === content[1]) {
+   } else if (playerSelection === options[0] && computerSelection === options[1]) {
 
       ans = `You Lose! ${computerSelection} wraps ${playerSelection}`
+      computerScore++;
+      rounds++;
+      
 
-   } else if (playerSelection === content[2] && computerSelection === content[0]) {
+   } else if (playerSelection === options[2] && computerSelection === options[0]) {
       
       ans = `You Lose! ${computerSelection} breaks ${playerSelection}`
+      computerScore++;
+      rounds++;
+      
 
-   } else if (playerSelection === content[1] && computerSelection === content[2]) {
+   } else if (playerSelection === options[1] && computerSelection === options[2]) {
 
       ans = `You Lose! ${computerSelection} cuts ${playerSelection}`
+      computerScore++;
+      rounds++;
+      
 
    } else {
       ans = `A Tie! Play Again?`
-   }
-return ans;
+      rounds++;
+      
+   } 
 
+   console.log(ans)
+
+   if (rounds === 1) { 
+      console.log(`${rounds} round played`)
+    } else {
+      console.log(`${rounds} rounds played`)
+    }
+    
+    
+
+    scoreCount(playerScore, computerScore);
+   
+
+
+
+
+return {playerScore, computerScore};
 };
 
-function Game() {
-   
+let scores = playRound();
 
-    return console.log(playRound(playerSelection, computerSelection));
-   
-}
+let newPlayerScore = scores.playerScore;
+let newComputerScore = scores.computerScore;
 
-const playerScore = 0;
-const computerScore = 0;
 
-// Score tracker
-function Scorecount(playerScore, computerScore) {
-   
-   if (playerScore == 5 || computerScore == 5) {
+    for (let i = 0; i < 4; i++) {
+      if(rounds < 6) {
+         playRound();
+      } 
+      
+      
+    }
+
+          // Score tracker
+function scoreCount() {
+
+   if (rounds === 5) {
        if (playerScore > computerScore) {
+           console.log(`Full Time Score: PlayerScore is ${playerScore}  ComputerScore is ${computerScore}`)
            console.log("You Win!")
            
        } else if (playerScore < computerScore) {
+         console.log(`Full Time Score: PlayerScore is ${playerScore}  ComputerScore is ${computerScore}`)
          console.log("You Lose!")
-   } else {
+   } else if (playerScore === computerScore) {
+      console.log(`Full Time Score: PlayerScore is ${playerScore}  ComputerScore is ${computerScore}`)
       console.log("It's a tie")
-   }
+   } 
+ }
+ 
+ }
+   
 }
-}
+
+
+
 
 Game();
